@@ -1,0 +1,6 @@
+{
+  "name": "Homemaid — Home Services Booking",
+  "description": "Homemaid: Home Services Made Easy. Your Home. Our Care. Professional on-demand home services including laundry pickup & delivery, house cleaning, baby sitting, elderly care, and water tank cleaning.",
+  "requestFramePermissions": ["geolocation"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

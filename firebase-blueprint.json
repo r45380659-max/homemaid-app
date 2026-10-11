@@ -1,0 +1,156 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "Customer and Admin user accounts in HomeMate",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string", "maxLength": 128 },
+        "phone": { "type": "string", "maxLength": 20 },
+        "name": { "type": "string", "maxLength": 100 },
+        "email": { "type": "string", "maxLength": 150 },
+        "role": { "type": "string", "enum": ["customer", "admin"] },
+        "preferredLanguage": { "type": "string", "maxLength": 10 },
+        "createdAt": { "type": "string", "maxLength": 50 }
+      },
+      "required": ["uid", "phone", "role", "createdAt"]
+    },
+    "Booking": {
+      "title": "Booking",
+      "description": "Home service booking records",
+      "type": "object",
+      "properties": {
+        "bookingId": { "type": "string", "maxLength": 64 },
+        "customerId": { "type": "string", "maxLength": 128 },
+        "customerPhone": { "type": "string", "maxLength": 20 },
+        "customerName": { "type": "string", "maxLength": 100 },
+        "serviceId": { "type": "string", "maxLength": 64 },
+        "serviceName": { "type": "string", "maxLength": 100 },
+        "serviceColor": { "type": "string", "maxLength": 30 },
+        "capturedPrice": { "type": "number" },
+        "amount": { "type": "number" },
+        "paymentMethod": { "type": "string", "enum": ["UPI", "PAY_AFTER_SERVICE"] },
+        "paymentStatus": { "type": "string", "enum": ["PENDING", "PAY_AFTER_SERVICE_PENDING", "PAID", "VERIFIED", "REFUND_REQUIRED", "REFUNDED"] },
+        "bookingStatus": { "type": "string", "enum": ["CONFIRMED", "WAITING_FOR_MAID_ASSIGNMENT", "MAID_ASSIGNED", "IN_PROGRESS", "COMPLETED", "CANCELLED_BY_CUSTOMER", "CANCELLED_BY_HOMEMATE"] },
+        "bookingDate": { "type": "string", "maxLength": 20 },
+        "bookingTime": { "type": "string", "maxLength": 20 },
+        "createdAt": { "type": "string", "maxLength": 50 },
+        "updatedAt": { "type": "string", "maxLength": 50 }
+      },
+      "required": ["bookingId", "customerId", "customerPhone", "serviceId", "serviceName", "capturedPrice", "amount", "paymentMethod", "paymentStatus", "bookingStatus", "bookingDate", "bookingTime", "createdAt", "updatedAt"]
+    },
+    "Service": {
+      "title": "Service",
+      "description": "Home services catalog in HomeMate",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 64 },
+        "name": { "type": "string", "maxLength": 100 },
+        "tagline": { "type": "string", "maxLength": 200 },
+        "description": { "type": "string", "maxLength": 500 },
+        "colorName": { "type": "string", "maxLength": 30 },
+        "isActive": { "type": "boolean" },
+        "basePriceDescription": { "type": "string", "maxLength": 150 }
+      },
+      "required": ["id", "name", "isActive"]
+    },
+    "LaundryItem": {
+      "title": "LaundryItem",
+      "description": "Laundry items with per-item pricing",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 64 },
+        "name": { "type": "string", "maxLength": 100 },
+        "price": { "type": "number" },
+        "category": { "type": "string", "maxLength": 50 }
+      },
+      "required": ["id", "name", "price"]
+    },
+    "Maid": {
+      "title": "Maid",
+      "description": "HomeMate verified maid roster managed by admin",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 64 },
+        "maidId": { "type": "string", "maxLength": 64 },
+        "name": { "type": "string", "maxLength": 100 },
+        "phone": { "type": "string", "maxLength": 20 },
+        "area": { "type": "string", "maxLength": 100 },
+        "city": { "type": "string", "maxLength": 100 },
+        "isAvailable": { "type": "boolean" },
+        "isActive": { "type": "boolean" },
+        "joinedDate": { "type": "string", "maxLength": 50 }
+      },
+      "required": ["id", "maidId", "name", "phone", "area", "city", "isAvailable", "isActive"]
+    },
+    "MaidApplication": {
+      "title": "MaidApplication",
+      "description": "Public applications submitted by maids",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 64 },
+        "applicationId": { "type": "string", "maxLength": 64 },
+        "fullName": { "type": "string", "maxLength": 100 },
+        "phone": { "type": "string", "maxLength": 20 },
+        "area": { "type": "string", "maxLength": 100 },
+        "city": { "type": "string", "maxLength": 100 },
+        "skillsDetails": { "type": "string", "maxLength": 500 },
+        "status": { "type": "string", "enum": ["PENDING", "APPROVED", "REJECTED"] },
+        "appliedAt": { "type": "string", "maxLength": 50 }
+      },
+      "required": ["id", "applicationId", "fullName", "phone", "area", "city", "status", "appliedAt"]
+    },
+    "AppSettings": {
+      "title": "AppSettings",
+      "description": "System-wide settings such as UPI and contact info",
+      "type": "object",
+      "properties": {
+        "upiId": { "type": "string", "maxLength": 100 },
+        "merchantName": { "type": "string", "maxLength": 100 },
+        "paymentInstructions": { "type": "string", "maxLength": 500 },
+        "customerCarePhone": { "type": "string", "maxLength": 30 },
+        "customerCareWhatsApp": { "type": "string", "maxLength": 30 },
+        "businessOpeningTime": { "type": "string", "maxLength": 10 },
+        "businessClosingTime": { "type": "string", "maxLength": 10 },
+        "payNowEnabled": { "type": "boolean" },
+        "payAfterMaidArrivesEnabled": { "type": "boolean" },
+        "updatedAt": { "type": "string", "maxLength": 50 }
+      },
+      "required": ["upiId", "merchantName", "customerCarePhone", "payNowEnabled", "payAfterMaidArrivesEnabled"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "#/entities/User",
+      "description": "User profiles for authenticated customers and admins"
+    },
+    "/bookings/{bookingId}": {
+      "schema": "#/entities/Booking",
+      "description": "Bookings submitted by customers and managed by admins"
+    },
+    "/services/{serviceId}": {
+      "schema": "#/entities/Service",
+      "description": "Catalog of available home services"
+    },
+    "/laundryItems/{itemId}": {
+      "schema": "#/entities/LaundryItem",
+      "description": "Items and rates for laundry service"
+    },
+    "/maids/{maidId}": {
+      "schema": "#/entities/Maid",
+      "description": "Admin-managed roster of service maids"
+    },
+    "/maidApplications/{applicationId}": {
+      "schema": "#/entities/MaidApplication",
+      "description": "Public applications to work with HomeMate"
+    },
+    "/appSettings/general": {
+      "schema": "#/entities/AppSettings",
+      "description": "Global application configuration"
+    },
+    "/admins/{adminUid}": {
+      "schema": "#/entities/User",
+      "description": "List of authorized administrator UIDs"
+    }
+  }
+}

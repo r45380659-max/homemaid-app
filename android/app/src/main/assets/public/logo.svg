@@ -1,0 +1,113 @@
+<svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Main House & Heart Gradient: Turquoise Cyan -> Vibrant Azure -> Deep Royal Blue -->
+    <linearGradient id="homemaidLogoGrad" x1="50%" y1="10%" x2="50%" y2="92%">
+      <stop offset="0%" stop-color="#00C8D7" />
+      <stop offset="35%" stop-color="#009CE8" />
+      <stop offset="70%" stop-color="#0072CE" />
+      <stop offset="100%" stop-color="#004DA5" />
+    </linearGradient>
+
+    <!-- Sparkle Stars Gradient -->
+    <linearGradient id="homemaidSparkleGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#3CE8FF" />
+      <stop offset="100%" stop-color="#008BE3" />
+    </linearGradient>
+
+    <!-- Soft Depth Filter for clean elevated look -->
+    <filter id="softGlow" x="-10%" y="-10%" width="120%" height="120%" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="4" stdDeviation="4" flood-color="#0057B7" flood-opacity="0.18" />
+    </filter>
+  </defs>
+
+  <!-- Left Fresh Air / Breeze Wisps -->
+  <g opacity="0.8">
+    <path d="M 18 150 C 10 134, 12 120, 20 106" stroke="url(#homemaidLogoGrad)" stroke-width="3" stroke-linecap="round" fill="none" />
+    <path d="M 28 162 C 20 148, 22 134, 30 120" stroke="url(#homemaidLogoGrad)" stroke-width="3" stroke-linecap="round" fill="none" />
+  </g>
+
+  <!-- Right Fresh Air / Breeze Wisps -->
+  <g opacity="0.8">
+    <path d="M 182 150 C 190 134, 188 120, 180 106" stroke="url(#homemaidLogoGrad)" stroke-width="3" stroke-linecap="round" fill="none" />
+    <path d="M 172 162 C 180 148, 178 134, 170 120" stroke="url(#homemaidLogoGrad)" stroke-width="3" stroke-linecap="round" fill="none" />
+  </g>
+
+  <!-- Top Right Chimney Stream Wisp -->
+  <path d="M 162 76 C 160 58, 166 46, 163 32" stroke="url(#homemaidLogoGrad)" stroke-width="2.5" stroke-linecap="round" opacity="0.7" fill="none" />
+
+  <!-- Sparkle Stars (Upper Right & Ambient) -->
+  <g filter="url(#softGlow)">
+    <!-- Primary Big Star (Top Right) -->
+    <path d="M 148 14 Q 148 22 156 22 Q 148 22 148 30 Q 148 22 140 22 Q 148 22 148 14 Z" fill="url(#homemaidSparkleGrad)" />
+    <!-- Secondary Star -->
+    <path d="M 176 28 Q 176 34 182 34 Q 176 34 176 40 Q 176 34 170 34 Q 176 34 176 28 Z" fill="url(#homemaidSparkleGrad)" />
+    <!-- Tertiary Star -->
+    <path d="M 132 30 Q 132 34 136 34 Q 132 34 132 38 Q 132 34 128 34 Q 132 34 132 30 Z" fill="url(#homemaidSparkleGrad)" />
+    <!-- Tiny sparkle dots -->
+    <circle cx="34" cy="62" r="1.8" fill="#00C8D7" opacity="0.8" />
+    <circle cx="186" cy="80" r="1.8" fill="#009CE8" opacity="0.8" />
+    <circle cx="138" cy="14" r="1.5" fill="#3CE8FF" opacity="0.8" />
+  </g>
+
+  <!-- Main House Structure & Chimney -->
+  <g filter="url(#softGlow)">
+    <!-- Chimney on Right Roof -->
+    <path
+      d="M 137 72 L 137 51 C 137 48.5, 139 47, 142 47 L 149 47 C 152 47, 154 48.5, 154 51 L 154 87"
+      stroke="url(#homemaidLogoGrad)"
+      stroke-width="8.5"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+
+    <!-- House Roof Outline with rounded apex and extended eaves -->
+    <path
+      d="M 32 108 L 96 46 C 98.5 43.5, 101.5 43.5, 104 46 L 168 108"
+      stroke="url(#homemaidLogoGrad)"
+      stroke-width="9.5"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+
+    <!-- House Left Wall into Bottom Curve -->
+    <path
+      d="M 45 106 L 45 158 C 45 168, 54 176, 64 176 L 90 176"
+      stroke="url(#homemaidLogoGrad)"
+      stroke-width="9.5"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+
+    <!-- House Right Wall into Bottom Curve -->
+    <path
+      d="M 155 106 L 155 158 C 155 168, 146 176, 136 176 L 110 176"
+      stroke="url(#homemaidLogoGrad)"
+      stroke-width="9.5"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+
+    <!-- Continuous Central Heart & Ribbon Base Loop -->
+    <!-- The heart loops elegantly at the bottom center and curves upward into two full rounded lobes -->
+    <path
+      d="M 100 120 
+         C 88 102, 64 102, 64 126 
+         C 64 148, 88 168, 100 178
+         C 112 168, 136 148, 136 126
+         C 136 102, 112 102, 100 120 Z"
+      stroke="url(#homemaidLogoGrad)"
+      stroke-width="9.5"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      fill="none"
+    />
+
+    <!-- Ribbon Under-loop Base Accent (giving that woven house & heart effect) -->
+    <path
+      d="M 86 176 C 94 179, 106 179, 114 176"
+      stroke="url(#homemaidLogoGrad)"
+      stroke-width="9.5"
+      stroke-linecap="round"
+    />
+  </g>
+</svg>

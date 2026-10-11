@@ -1,0 +1,11 @@
+{
+	"appId": "com.homemate.app",
+	"appName": "HomeMate",
+	"webDir": "dist",
+	"server": {
+		"androidScheme": "https"
+	},
+	"android": {
+		"webContentsDebuggingEnabled": false
+	}
+}

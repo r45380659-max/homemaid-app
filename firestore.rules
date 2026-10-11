@@ -1,0 +1,93 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Global default-deny
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isAdmin() {
+      return isSignedIn() && exists(/databases/$(database)/documents/admins/$(request.auth.uid));
+    }
+
+    function isOwner(userId) {
+      return isSignedIn() && request.auth.uid == userId;
+    }
+
+    function isValidId(id) {
+      return id is string && id.size() > 0 && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
+    }
+
+    // Users Collection
+    match /users/{userId} {
+      allow get: if isOwner(userId) || isAdmin();
+      allow list: if isAdmin();
+      allow create: if isOwner(userId) && request.resource.data.uid == userId;
+      allow update: if (isOwner(userId) && request.resource.data.uid == userId && !request.resource.data.diff(resource.data).affectedKeys().hasAny(['role'])) || isAdmin();
+      allow delete: if isAdmin();
+    }
+
+    // Admins Collection
+    match /admins/{adminUid} {
+      allow read, write: if isAdmin();
+    }
+
+    // Public Catalog: Services & Laundry
+    match /services/{serviceId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    match /laundryItems/{itemId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    match /appSettings/{settingId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // Maids: Strictly Admin only! Customers NEVER browse or select maids directly.
+    match /maids/{maidId} {
+      allow read, write: if isAdmin();
+    }
+
+    // Maid Applications: Public submit, Admin read & review
+    match /maidApplications/{applicationId} {
+      allow create: if request.resource.data.fullName is string
+                    && request.resource.data.fullName.size() > 0
+                    && request.resource.data.phone is string
+                    && request.resource.data.status == 'PENDING';
+      allow read, update, delete: if isAdmin();
+    }
+
+    // Bookings
+    match /bookings/{bookingId} {
+      // Customers can read their own bookings; Admins can read all
+      allow get: if (isSignedIn() && resource.data.customerId == request.auth.uid) || isAdmin();
+      allow list: if (isSignedIn() && resource.data.customerId == request.auth.uid) || isAdmin();
+
+      // Customer creates a new booking
+      allow create: if isSignedIn()
+                    && request.resource.data.customerId == request.auth.uid
+                    && request.resource.data.capturedPrice is number
+                    && request.resource.data.amount is number
+                    && request.resource.data.bookingStatus == 'CONFIRMED';
+
+      // Customer can only cancel their own pending booking; Admin can manage all fields
+      allow update: if (isSignedIn()
+                        && resource.data.customerId == request.auth.uid
+                        && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['bookingStatus', 'cancellationReason', 'cancelledBy', 'updatedAt'])
+                        && request.resource.data.bookingStatus == 'CANCELLED_BY_CUSTOMER')
+                    || isAdmin();
+
+      allow delete: if isAdmin();
+    }
+  }
+}
